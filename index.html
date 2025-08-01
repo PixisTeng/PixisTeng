@@ -62,6 +62,23 @@
       gap: 20px;
       margin-top: 20px;
     }
+
+    .gallery--maps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .gallery--maps img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .gallery--maps img.large {
+      grid-column: 1 / -1;
+    }
     .gallery img {
       width: 100%;
       border-radius: 8px;
@@ -113,11 +130,11 @@
       </div>
 
       <h4>World Maps</h4>
-      <div class="gallery">
+      <div class="gallery--maps">
         <img src="images/Player House Map.png" alt="Player House">
         <img src="images/Player Land Map.png" alt="Land Map">
         <img src="images/Town Map.png" alt="Town Map">
-        <img src="images/Academy Map.png" alt="Academy Map">
+        <img src="images/Academy Map.png" alt="Academy Map" class="large">
       </div>
 
       <p style="text-align:center; margin-top:30px;">
