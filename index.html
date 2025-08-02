@@ -105,34 +105,20 @@
       object-fit: contain;
     }
 
-    .gallery--sprites {
-      display: grid;
-      grid-template-colunmns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+    .gif-demo {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px 0 32px;
     }
-
-    .gallery--sprites img{
-      width: 100%;
+    
+    .gif-demo img {
+      width: 64px; 
       height: auto;
-      border: 2px solid var (--primary);
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .sprite-demo {
-      width: 64px;
-      height: 64px;
-      margin: 20px auto;
-      background-repeat: no-repeat;
-      background-position: 0 0;
       image-rendering: pixelated;
-      animation: idleCycle 2s steps(4) infinite, jumpCycle 0.8s steps(4) infinite 2s;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
-    .sprite-demo.boy { background-image: url('images/MiniVillagerMan.png'); }
-    .sprite-demo.girl { background-image: url('images/MiniVillagerWoman.png'); }
-    .sprite-demo.grandpa { background-image: url('images/MiniOldMan.png'); }
-    .sprite-demo.scarlet { background-image: url('images/MiniNobleMan.png'); }
         
     @keyframes idleCycle {
       from { background-position:   0   0; }
@@ -236,7 +222,18 @@
         <img src="images/BoySleep.png" alt="Boy Sleep">
         <img src="images/BoyUnimpressed.png" alt="Boy Unimpressed">
       </div>
-      <div class="sprite-demo boy"></div>
+      <div class="gif-demo">
+        <img
+          src="images/PlayerBoyIdle.gif"
+          alt="Boy Idle Animation"
+          title="Idle Cycle"
+        />
+        <img
+          src="images/PlayerBoyWalk.gif"
+          alt="Boy Walk Animation"
+          title="Walk Cycle"
+        />
+      </div>
     
       <h5>Player (Girl)</h5>
       <div class="gallery--portraits">
@@ -282,6 +279,7 @@
   </main>
 </body>
 </html>
+
 
 
 
