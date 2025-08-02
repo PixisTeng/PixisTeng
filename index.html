@@ -111,13 +111,24 @@
       gap: 16px;
       margin: 16px 0 32px;
     }
+
+    .gif-demo figure {
+      margin: 0;
+      text-align: center;
+    }
     
     .gif-demo img {
       width: 112px; 
       height: auto;
       image-rendering: pixelated;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 4px;
+    }
+
+    .gif-demo figcaption {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 6px;
     }
         
     @keyframes idleCycle {
@@ -223,16 +234,23 @@
         <img src="images/BoyUnimpressed.png" alt="Boy Unimpressed">
       </div>
       <div class="gif-demo">
-        <img
-          src="images/PlayerBoyIdle.gif"
-          alt="Boy Idle Animation"
-          title="Idle Cycle"
-        />
-        <img
-          src="images/PlayerBoyWalk.gif"
-          alt="Boy Walk Animation"
-          title="Walk Cycle"
-        />
+        <figure>
+          <img
+            src="images/PlayerBoyIdle.gif"
+            alt="Boy Idle Animation"
+            title="Idle Cycle"
+          />
+          <figcaption>Idle</figcaption>
+        </figure>
+
+        <figure>
+          <img
+            src="images/PlayerBoyWalk.gif"
+            alt="Boy Walk Animation"
+            title="Walk Cycle"
+          />
+          <figcaption>Walk</figcaption>
+        </figure>
       </div>
       <p style="font-size:0.9em; color:#666;">
         Sprites courtesy of the 
@@ -285,6 +303,7 @@
   </main>
 </body>
 </html>
+
 
 
 
