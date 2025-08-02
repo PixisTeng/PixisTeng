@@ -122,6 +122,29 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .sprite-demo {
+      width: 64px;
+      height: 64px;
+      margin: 20px auto;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      image-rendering: pixelated;
+      animation: idleCycle 2s steps(4) infinite, jumpCycle 0.8s steps(4) infinite 2s;
+    }
+    .sprite-demo.boy { background-image: url('images/MiniVillagerMan.png'); }
+    .sprite-demo.girl { background-image: url('images/MiniVillagerWoman.png'); }
+    .sprite-demo.grandpa { background-image: url('images/MiniOldMan.png'); }
+    .sprite-demo.scarlet { background-image: url('images/MiniNobleMan.png'); }
+        
+    @keyframes idleCycle {
+      from { background-position:   0   0; }
+      to   { background-position: -256px 0; }
+    }
+    @keyframes walkCycle {
+      from { background-position:   0  -64px; }
+      to   { background-position: -256px -64px; }
+    }
+    
     a { color: var(--accent); }
     a:hover { text-decoration: underline; }
 
@@ -201,7 +224,7 @@
     </div>
 
     <h4>Character Assets</h4>
-      <h5>Portrait Emotion Variants</h5>
+      <h5>Player (Boy)</h5>
       <div class="gallery--portraits">
         <img src="images/BoyNeutral.png" alt="Boy Neutral">
         <img src="images/BoyHappy.png" alt="Boy Happy">
@@ -212,6 +235,11 @@
         <img src="images/BoyConcerned.png" alt="Boy Concerned">
         <img src="images/BoySleep.png" alt="Boy Sleep">
         <img src="images/BoyUnimpressed.png" alt="Boy Unimpressed">
+      </div>
+      <div class="sprite-demo boy"></div>
+    
+      <h5>Player (Girl)</h5>
+      <div class="gallery--portraits">
         <img src="images/GirlNeutral.png" alt="Girl Neutral">
         <img src="images/GirlHappy.png" alt="Girl Happy">
         <img src="images/GirlAngry.png" alt="Girl Angry">
@@ -222,14 +250,24 @@
         <img src="images/GirlSleep.png" alt="Girl Sleep">
         <img src="images/Gandpa.png" alt="Gandpa Portrait">
       </div>
+      <div class="sprite-demo girl"></div>
 
-     <h5>Miniature NPC Sprites</h5>
-      <div class="gallery--sprites">
-        <img src="images/MiniVillagerMan.png"  alt="Villager Man Sprites">
-        <img src="images/MiniVillagerWoman.png" alt="Villager Woman Sprites">
-        <img src="images/MiniOldMan.png"       alt="Old Man Sprites">
-        <img src="images/MiniNobleMan.png"     alt="Noble Man Sprites">
+      <h5>NPC: Grandpa</h5>
+      <div class="gallery--portraits">
+        <img src="images/Gandpa.png" alt="Grandpa Portrait">
       </div>
+      <div class="sprite-demo grandpa"></div>
+
+      <h5>NPC: Miss Scarlet</h5>
+      <div class="gallery--portraits">
+        <img src="images/Happy.png" alt="Scarlet Happy">
+        <img src="images/Neutral.png" alt="Scarlet Neutral">
+        <img src="images/Sigh.png" alt="Scarlet Sigh">
+        <img src="images/Surprise.png" alt="Scarlet Surprise">
+        <img src="images/Unhappy.png" alt="Scarlet Unhappy">
+        <img src="images/Unimpress.png" alt="Scarlet Unimpressed">
+      </div>
+      <div class="sprite-demo scarlet"></div>
 
     <div class="project-card">
       <h3>Smart Recipe App</h3>
@@ -244,6 +282,7 @@
   </main>
 </body>
 </html>
+
 
 
 
