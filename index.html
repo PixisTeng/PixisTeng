@@ -1,373 +1,788 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Tay Teng Teng | Game Dev Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tay Teng Teng | Game Developer & Software Engineer</title>
+  <meta name="description" content="Expandable game-dev inspired portfolio for Tay Teng Teng." />
   <style>
     :root {
-      --primary: #2c3e50;
-      --accent: #007acc;
-      --bg: #f0f4f8;
+      --bg: #0b1020;
+      --bg-soft: #121935;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.09);
+      --text: #e9eefc;
+      --muted: #a9b4d0;
+      --line: rgba(255,255,255,0.12);
+      --accent: #8ea7ff;
+      --accent-2: #79e0c2;
+      --accent-soft: rgba(142,167,255,0.16);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --max: 1200px;
+      --radius: 22px;
     }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--bg);
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      color: var(--primary);
-      line-height: 1.6;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(142,167,255,0.25), transparent 26%),
+        radial-gradient(circle at 85% 15%, rgba(121,224,194,0.14), transparent 22%),
+        linear-gradient(180deg, #0b1020 0%, #0c1226 100%);
+      color: var(--text);
+      line-height: 1.65;
     }
-    header {
-      background: #fff;
-      padding: 20px 40px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11,16,32,0.72);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    nav { text-align: right; }
-    nav a {
-      margin-left: 20px;
-      color: var(--primary);
-      font-weight: 600;
-      text-decoration: none;
+
+    nav {
+      min-height: 74px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
-    nav a:hover { color: var(--accent); }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(223,255,61,0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-links a { color: var(--muted); font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--text); }
+
+    .button, .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.9rem 1.2rem;
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--accent), #b49cff);
+      color: #09101f;
+      box-shadow: 0 10px 30px rgba(142,167,255,0.26);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .button:hover, .button-secondary:hover { transform: translateY(-1px); }
 
     .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .hero h1 { font-size: 3em; margin:0; }
-    .hero p { font-size: 1.2em; margin-top:8px; }
-
-    main { max-width: 960px; margin: auto; padding: 20px; }
-    h2, h3, h4 {
-      color: var(--primary);
-      border-left: 4px solid var(--accent);
-      padding-left: 12px;
-      margin-top: 40px;
-    }
-    h5 { margin-top: 30px; font-weight: 600; }
-
-    .project-card {
-      background: #fff;
-      padding: 30px;
-      margin: 40px 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 5rem 0 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
-    .gallery {
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      grid-auto-rows: 200px;
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      align-items: stretch;
     }
 
-    .gallery img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
     }
 
-    .gallery--maps {
+    .hero-main { padding: 2.2rem; }
+    .hero-side { padding: 1rem; display: grid; gap: 1rem; }
+
+    .eyebrow,
+    .mini-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    h1, h2, h3, h4 { margin: 0; line-height: 1.08; }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .lead {
+      max-width: 62ch;
+      color: var(--muted);
+      margin: 1rem 0 1.5rem;
+      font-size: 1.02rem;
+    }
+
+    .tag-row, .hero-actions, .social-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .tag-row { margin-top: 1rem; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.5rem 0.76rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      padding: 1.15rem;
+    }
+
+    .focus-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin: 0.3rem 0 0.35rem;
+    }
+
+    .focus-copy, .section-header p, .content-card p, .project-summary {
+      color: var(--muted);
+    }
+
+    .status-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 240px auto;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
-    .gallery--maps img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    
-    .gallery--maps img.large {
-      grid-column: 1 / -1;
-      object-fit: initial;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
     }
 
-    .gallery--portraits{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      grid-auto-rows: 140px;
-      gap: 12px;
+    .status-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      padding: 1rem;
     }
 
-    .gallery--portraits img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .status-box strong {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 1.15rem;
     }
 
-    .gif-demo {
+    .section { padding: 2rem 0 0.6rem; }
+
+    .section-header {
       display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .split, .skills-grid, .contact-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .split { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr 0.95fr; }
+
+    .content-card, .contact-box { padding: 1.35rem; }
+
+    .projects-shell {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .projects-header-row {
+      display: grid;
+      grid-template-columns: 62px 1.6fr 1fr 44px;
+      gap: 1rem;
+      padding: 0.95rem 1rem;
+      color: #72777f;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .project-item {
+      border-top: 1px solid var(--line);
+    }
+
+    .project-toggle {
+      width: 100%;
+      background: transparent;
+      color: inherit;
+      border: 0;
+      padding: 1.35rem 1rem;
+      display: grid;
+      grid-template-columns: 62px 1.6fr 1fr 44px;
+      gap: 1rem;
+      align-items: start;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .project-number {
+      color: #737983;
+      font-size: 0.95rem;
+      padding-top: 0.3rem;
+    }
+
+    .project-title {
+      font-size: clamp(1.2rem, 2vw, 1.95rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .stack-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: flex-start;
+      align-self: start;
+      padding-top: 0.1rem;
+    }
+
+    .stack-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.34rem 0.58rem;
+      border-radius: 0;
+      font-size: 0.78rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+
+    .stack-chip.highlight {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(223,255,61,0.18);
+    }
+
+    .project-caret {
+      display: inline-grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 1.15rem;
+      padding-top: 0.15rem;
+      transition: transform 0.22s ease;
+    }
+
+    .project-item[open] .project-caret { transform: rotate(180deg); }
+
+    .project-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .project-media {
+      min-height: 400px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)),
+        radial-gradient(circle at 30% 20%, rgba(142,167,255,0.18), transparent 24%),
+        radial-gradient(circle at 80% 80%, rgba(121,224,194,0.10), transparent 22%),
+        #0d1328;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin: 16px 0 32px;
+      color: #5f646b;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      text-align: center;
+      padding: 1.5rem;
     }
 
-    .gif-demo figure {
+    .project-details {
+      padding: 2rem;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .project-kicker {
+      margin-bottom: 1rem;
+      color: #737983;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .project-lead {
+      margin: 0 0 1.1rem;
+      font-size: 1.05rem;
+      color: #d7dae0;
+    }
+
+    .project-lead strong { color: #ffffff; }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
       margin: 0;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      gap: 0.7rem;
+      color: #b5bac2;
+    }
+
+    .feature-list li::before {
+      content: ">";
+      color: var(--accent);
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .progress-note {
+      margin-top: 1.4rem;
+      padding-left: 0.8rem;
+      border-left: 2px solid var(--accent);
+      color: #777c84;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .text-link {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .text-link:hover { color: var(--accent); }
+
+    ul.clean {
+      list-style: none;
+      margin: 0.8rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    ul.clean li {
+      display: flex;
+      gap: 0.7rem;
+      color: var(--muted);
+    }
+
+    ul.clean li::before {
+      content: "▹";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .contact-item {
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    footer {
+      padding: 2.8rem 0 3rem;
+      color: var(--muted);
       text-align: center;
-    }
-    
-    .gif-demo img {
-      width: 112px; 
-      height: auto;
-      image-rendering: pixelated;
-      border: none;
-      border-radius: 4px;
+      font-size: 0.92rem;
     }
 
-    .gif-demo figcaption {
-      font-size: 0.9em;
-      color: #666;
-      margin-top: 6px;
-    }
-        
-    @keyframes idleCycle {
-      from { background-position:   0   0; }
-      to   { background-position: -256px 0; }
-    }
-    @keyframes walkCycle {
-      from { background-position:   0  -64px; }
-      to   { background-position: -256px -64px; }
-    }
-    
-    a { color: var(--accent); }
-    a:hover { text-decoration: underline; }
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .skills-grid,
+      .contact-grid,
+      .project-body {
+        grid-template-columns: 1fr;
+      }
 
-    .contact { text-align: center; margin: 60px 0; }
+      .projects-header-row,
+      .project-toggle {
+        grid-template-columns: 48px 1fr;
+      }
 
-    .demo-link {
-      text-align: center;
-      margin: 16px 0 40px;
+      .projects-header-row .header-stack,
+      .projects-header-row .header-arrow,
+      .project-toggle .stack-column,
+      .project-toggle .project-caret {
+        display: none;
+      }
+
+      .project-media {
+        min-height: 240px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      nav {
+        padding: 0.8rem 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
-    
-    .demo-link a {
-      display: inline-block;
-      background: var(--accent);  
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    
-    .demo-link a:hover {
-      background: #005fa3;  
+
+    @media (max-width: 640px) {
+      .hero-main,
+      .content-card,
+      .contact-box,
+      .project-details {
+        padding: 1.2rem;
+      }
+
+      .hero { padding-top: 4.5rem; }
+      .status-grid { grid-template-columns: 1fr 1fr; }
+      .section-header { flex-direction: column; align-items: start; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="hero">
-      <h1>Hello, I am Tay Teng Teng</h1>
-      <p>Junior Game Developer • Unity &amp; C# • Interactive Storytelling</p>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav>
+        <a class="brand" href="#top">
+          <span class="brand-mark"></span>
+          <span>Tay Teng Teng</span>
+        </a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+          <a class="button-secondary" href="#contact">Let’s Connect</a>
+        </div>
+      </nav>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <h2 id="projects">Projects</h2>
-
-    <div class="project-card">
-      <h3>Fantasy-Themed Mood Checker Game</h3>
-      <p><strong>Unity, C#</strong> – An interactive story-based game based on emotional input.<br>
-      <em>Key Features:</em> Character selection, gender identity choice, dialogue-based progression.</p>
-
-      <h4>Dialogue &amp; Choice System</h4>
-      <div class="gallery">
-        <img src="images/Opening Dialogue.png" alt="Opening Dialogue">
-        <img src="images/Class.png" alt="Class Selection">
-        <img src="images/Gender.png" alt="Gender Selection">
-        <img src="images/Interactions.png" alt="Character Interaction">
-        <img src="images/Journal.png" alt="Emotion Journal">
-        <img src="images/Calming Game.png" alt="Calming Game">
-      </div>
-
-      <h4>Exploration &amp; Environment</h4>
-      <div class="gallery">
-        <img src="images/Opening Scene.png" alt="Spawning Area">
-        <img src="images/Lake.png" alt="Lake">
-        <img src="images/Offering Station.png" alt="Offering Station">
-        <img src="images/Shop.png" alt="Shop">
-        <img src="images/Tree House.png" alt="Tree House">
-        <img src="images/Academy Building.png" alt="Academy Building">
-      </div>
-
-      <h4>World Maps</h4>
-      <div class="gallery--maps">
-        <img src="images/Player House Map.png" alt="Player House">
-        <img src="images/Town Map.png" alt="Town Map">
-        <img src="images/Academy Map.png" alt="Academy Map">
-        <img src="images/Player Land Map.png" alt="Land Map" class="large">
-      </div>
-
-      <p class="demo-link">
-        <a href="https://youtu.be/YOUR_VIDEO_LINK" target="_blank"> Watch Demo</a>
-      </p>
-
-      <h4>Character Assets</h4>
-      <p style="font-size:0.9em; color:#666;">
-        Portraits created with <a href="https://picrew.me/en/image_maker/644129" target="_blank">Picrew (Makówka’s Generator)</a>. Used under non-commercial educational terms for prototype demos only.</p>
-      <p style="font-size:0.9em; color:#666;">
-        Sprites courtesy of the <a href="https://lyaseek.itch.io/minifvillagers" target="_blank"> MinifVillagers pack by LYASeeK
-        </a>.
-      </p>
-      
-      <h5>Player (Boy)</h5>
-      <div class="gallery--portraits">
-        <img src="images/BoyNeutral.png" alt="Boy Neutral">
-        <img src="images/BoyHappy.png" alt="Boy Happy">
-        <img src="images/BoyAngry.png" alt="Boy Angry">
-        <img src="images/BoyUnhappy.png" alt="Boy Unhappy">
-        <img src="images/BoySigh.png" alt="Boy Sigh">
-        <img src="images/BoyAwkward.png" alt="Boy Awkward">
-        <img src="images/BoyConcerned.png" alt="Boy Concerned">
-        <img src="images/BoySleep.png" alt="Boy Sleep">
-        <img src="images/BoyUnimpressed.png" alt="Boy Unimpressed">
-      </div>
-      <div class="gif-demo">
-        <figure>
-          <img
-            src="images/PlayerBoyIdle.gif"
-            alt="Boy Idle Animation"
-            title="Idle Cycle"
-          />
-          <figcaption>Idle</figcaption>
-        </figure>
-
-        <figure>
-          <img
-            src="images/PlayerBoyWalk.gif"
-            alt="Boy Walk Animation"
-            title="Walk Cycle"
-          />
-          <figcaption>Walk</figcaption>
-        </figure>
-      </div>
-     
-    
-      <h5>Player (Girl)</h5>
-      <div class="gallery--portraits">
-        <img src="images/GirlNeutral.png" alt="Girl Neutral">
-        <img src="images/GirlHappy.png" alt="Girl Happy">
-        <img src="images/GirlAngry.png" alt="Girl Angry">
-        <img src="images/GirlUnhappy.png" alt="Girl Unhappy">
-        <img src="images/GirlSigh.png" alt="Girl Sigh">
-        <img src="images/GirlAwkward.png" alt="Girl Awkward">
-        <img src="images/GirlConcerned.png" alt="Girl Concerned">
-        <img src="images/GirlSleep.png" alt="Girl Sleep">
-      </div>
-       <div class="gif-demo">
-        <figure>
-          <img
-            src="images/PlayerGirlIdle.gif"
-            alt="Girl Idle Animation"
-            title="Idle Cycle"
-          />
-          <figcaption>Idle</figcaption>
-        </figure>
-
-        <figure>
-          <img
-            src="images/PlayerGirlWalk.gif"
-            alt="Girl Walk Animation"
-            title="Walk Cycle"
-          />
-          <figcaption>Walk</figcaption>
-        </figure>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Aspiring Game Developer</div>
+          <h1>Designing playful systems with cleaner code and stronger intent.</h1>
+          <p class="lead">
+            I’m Tay Teng Teng, an aspiring game developer and software engineer interested in interactive systems,
+            player-facing polish, and projects that feel thoughtful in both design and implementation.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">View Projects</a>
+            <a class="button-secondary" href="#contact">Contact Me</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Unity learner</span>
+            <span class="tag">C# foundations</span>
+            <span class="tag">Interactive design</span>
+            <span class="tag">Portfolio in progress</span>
+          </div>
+          <div class="social-row">
+            <a class="text-link" href="#">GitHub ↗</a>
+            <a class="text-link" href="#">LinkedIn ↗</a>
+            <a class="text-link" href="#">Resume ↗</a>
+          </div>
         </div>
 
-       <h5>Self-Made Animated Portrait</h5>
-        <div class="gif-demo">
-          <figure>
-            <img
-              src="images/PlayerGirl_Recreated.gif"
-              alt="Self-Made Animated Portrait"
-              title="Original Animated Character Portrait"
-              style="image-rendering: auto; height: 140px; width: auto;"
-            />
-            <figcaption>Talking</figcaption>
-          </figure>
-
-          <figure>
-            <img
-              src="images/GirlCheecky.gif"
-              alt="Player Girl Cheecky Animated Portrait"
-              title="Original Animated Character Portrait"
-              style="image-rendering: auto; height: 140px; width: auto;"
-            />
-            <figcaption>Cheecky</figcaption>
-          </figure>
+        <div class="card hero-side">
+          <div class="panel">
+            <div class="mini-label">Current focus</div>
+            <div class="focus-title">Small games, better understanding</div>
+            <div class="focus-copy">Building scoped projects I can fully explain, refine, and present professionally.</div>
+          </div>
+          <div class="status-grid">
+            <div class="status-box"><span class="mini-label">Direction</span><strong>Game Dev</strong></div>
+            <div class="status-box"><span class="mini-label">Approach</span><strong>Build + Learn</strong></div>
+            <div class="status-box"><span class="mini-label">Tools</span><strong>Unity, C#, Web</strong></div>
+            <div class="status-box"><span class="mini-label">Style</span><strong>Clean & Playful</strong></div>
+          </div>
+          <div class="panel">
+            <div class="mini-label">Portfolio note</div>
+            <div class="focus-copy">This version uses an expandable project layout so visitors can scan quickly, then dive deeper into selected work.</div>
+          </div>
         </div>
-        
-        <p style="font-size:0.9em; color:#666; text-align: center; max-width: 600px; margin: 12px auto 32px;">
-          The animation above is an original self-made character portrait created to explore custom art styles for the game prototype.
-        </p>
-
-
-
-      <h5>NPC: Grandpa</h5>
-      <div class="gallery--portraits">
-        <img src="images/Gandpa.png" alt="Grandpa Portrait">
       </div>
-       <div class="gif-demo">
-        <figure>
-          <img
-            src="images/GrandpaIdle.gif"
-            alt="Grandpa Idle Animation"
-            title="Idle Cycle"
-          />
-          <figcaption>Idle</figcaption>
-        </figure>
-      </div>
+    </section>
 
-      <h5>NPC: Miss Scarlet</h5>
-      <div class="gallery--portraits">
-        <img src="images/Happy.png" alt="Scarlet Happy">
-        <img src="images/Neutral.png" alt="Scarlet Neutral">
-        <img src="images/Sigh.png" alt="Scarlet Sigh">
-        <img src="images/Surprise.png" alt="Scarlet Surprise">
-        <img src="images/Unhappy.png" alt="Scarlet Unhappy">
-        <img src="images/Unimpress.png" alt="Scarlet Unimpressed">
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>About</h2>
+            <p>A concise intro that keeps your personality while feeling more professional.</p>
+          </div>
+        </div>
+        <div class="split">
+          <div class="card content-card">
+            <h3>Who I am</h3>
+            <p>
+              I enjoy creating projects that feel expressive, engaging, and clear to use. My background includes personal web builds,
+              creative experiments, and portfolio work. I’m currently rebuilding my technical foundation with a stronger focus on understanding,
+              not just getting something to run.
+            </p>
+          </div>
+          <div class="card content-card">
+            <h3>What I’m aiming for</h3>
+            <p>
+              I’m interested in opportunities where I can grow as a developer, contribute to polished interactive products,
+              and keep improving both my coding ability and design sense. Long term, I’m especially drawn to game development.
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="gif-demo">
-        <figure>
-          <img
-            src="images/MissScarletIdle.gif"
-            alt="Miss Scarlet Idle Animation"
-            title="Idle Cycle"
-          />
-          <figcaption>Idle</figcaption>
-        </figure>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Selected Projects</h2>
+            <p>This layout works well for your portfolio because it keeps the top view clean, then reveals details only when someone wants more.</p>
+          </div>
+        </div>
+
+        <div class="projects-shell">
+          <div class="projects-header-row">
+            <div>#</div>
+            <div>Project</div>
+            <div class="header-stack">Stack</div>
+            <div class="header-arrow"></div>
+          </div>
+
+          <details class="project-item" open>
+            <summary class="project-toggle">
+              <div class="project-number">01</div>
+              <div>
+                <div class="project-title">Fantasy Mood Checker Game</div>
+                <div class="project-summary">Unity · Branching dialogue engine · State machine architecture · OOP</div>
+              </div>
+              <div class="stack-column">
+                <div class="stack-wrap">
+                  <span class="stack-chip highlight">C#</span>
+                  <span class="stack-chip highlight">Unity</span>
+                  <span class="stack-chip">OOP</span>
+                  <span class="stack-chip">State Machines</span>
+                  <span class="stack-chip">Git</span>
+                </div>
+              </div>
+              <div class="project-caret">⌄</div>
+            </summary>
+            <div class="project-body">
+              <div class="project-media">Gameplay recording or cover art goes here</div>
+              <div class="project-details">
+                <div class="project-kicker">Final Year Project · PSB Academy 2025</div>
+                <p class="project-lead">
+                  An RPG concept where the narrative and world <strong>adapt to the player’s emotional state</strong>, built to explore mental wellness through interactive storytelling.
+                </p>
+                <ul class="feature-list">
+                  <li>Built a branching dialogue engine in C# using state machines separated from core game logic.</li>
+                  <li>Applied OOP patterns to keep the architecture modular, readable, and easier to extend.</li>
+                  <li>Designed an emotion-state system that changes NPC responses and narrative flow.</li>
+                  <li>Worked through the full lifecycle from concept and requirements to implementation and documentation.</li>
+                  <li>Maintained project structure and version control with a cleaner solo development workflow.</li>
+                </ul>
+                <div class="progress-note">Gameplay recording in progress — upload when ready</div>
+                <div class="actions-row">
+                  <a class="button" href="#">GitHub ↗</a>
+                  <a class="button-secondary" href="#">Case Study ↗</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="project-item">
+            <summary class="project-toggle">
+              <div class="project-number">02</div>
+              <div>
+                <div class="project-title">Smart Recipe App</div>
+                <div class="project-summary">Python · REST API integration · SQL schema · Allergy detection logic</div>
+              </div>
+              <div class="stack-column">
+                <div class="stack-wrap">
+                  <span class="stack-chip highlight">Python</span>
+                  <span class="stack-chip highlight">SQL</span>
+                  <span class="stack-chip">REST API</span>
+                  <span class="stack-chip">Figma</span>
+                </div>
+              </div>
+              <div class="project-caret">⌄</div>
+            </summary>
+            <div class="project-body">
+              <div class="project-media">App screen or feature mockup</div>
+              <div class="project-details">
+                <div class="project-kicker">Concept Build</div>
+                <p class="project-lead">
+                  A recipe-focused application concept built around <strong>safer food discovery</strong>, with logic to surface recipes while accounting for user preferences and allergens.
+                </p>
+                <ul class="feature-list">
+                  <li>Structured recipe and user data with a simple SQL-backed schema.</li>
+                  <li>Integrated external data through API-based recipe lookup and filtering logic.</li>
+                  <li>Explored allergy detection and safer recommendation flows as a product feature.</li>
+                  <li>Used Figma to plan a cleaner user journey before implementation.</li>
+                </ul>
+                <div class="actions-row">
+                  <a class="button" href="#">GitHub ↗</a>
+                  <a class="button-secondary" href="#">Prototype ↗</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="project-item">
+            <summary class="project-toggle">
+              <div class="project-number">03</div>
+              <div>
+                <div class="project-title">Portfolio Website</div>
+                <div class="project-summary">HTML · CSS · Responsive layout · Recruiter-focused presentation</div>
+              </div>
+              <div class="stack-column">
+                <div class="stack-wrap">
+                  <span class="stack-chip highlight">HTML</span>
+                  <span class="stack-chip highlight">CSS</span>
+                  <span class="stack-chip">Responsive Design</span>
+                  <span class="stack-chip">GitHub Pages</span>
+                </div>
+              </div>
+              <div class="project-caret">⌄</div>
+            </summary>
+            <div class="project-body">
+              <div class="project-media">Portfolio preview image</div>
+              <div class="project-details">
+                <div class="project-kicker">Personal Branding</div>
+                <p class="project-lead">
+                  A personal portfolio site rebuilt to feel <strong>cleaner, more intentional, and easier to scan</strong> for recruiters, collaborators, and studios.
+                </p>
+                <ul class="feature-list">
+                  <li>Improved content hierarchy so visitors understand your direction quickly.</li>
+                  <li>Used a clearer layout for projects, skills, and contact information.</li>
+                  <li>Focused on stronger first impressions without losing personality.</li>
+                </ul>
+                <div class="actions-row">
+                  <a class="button" href="#">Live Site ↗</a>
+                  <a class="button-secondary" href="#">Source ↗</a>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
       </div>
+    </section>
 
-    <div class="project-card">
-      <h3>Smart Recipe App</h3>
-      <p><strong>Python, Figma</strong> – Recommends recipes based on allergies and nutrition data.</p>
-      <p style="text-align:center;"><a href="#">See Case Study</a></p>
-    </div>
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Skills & Strengths</h2>
+            <p>Keep this section honest, specific, and aligned with what you are actively building.</p>
+          </div>
+        </div>
 
-    <div class="contact" id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:tttay001@gmail.com">tttay001@gmail.com</a></p>
-    </div>
+        <div class="skills-grid">
+          <div class="card content-card">
+            <h3>Core Tools</h3>
+            <ul class="clean">
+              <li>Unity, beginner C# workflow</li>
+              <li>HTML, CSS, JavaScript</li>
+              <li>GitHub Pages and project deployment</li>
+            </ul>
+          </div>
+          <div class="card content-card">
+            <h3>Focus Areas</h3>
+            <ul class="clean">
+              <li>Small game loops and interactive systems</li>
+              <li>UI clarity and player-facing polish</li>
+              <li>Learning through scoped builds</li>
+            </ul>
+          </div>
+          <div class="card content-card">
+            <h3>Working Style</h3>
+            <ul class="clean">
+              <li>Curious, visual, and iterative</li>
+              <li>Open to feedback and refinement</li>
+              <li>Focused on building real understanding</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Contact</h2>
+            <p>Make it easy for recruiters, collaborators, or hiring teams to reach you.</p>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <div class="card contact-box">
+            <h3>Let’s build something thoughtful.</h3>
+            <p class="project-summary">
+              I’m open to graduate opportunities, internships, collaborative projects, and conversations around game development,
+              software engineering, and interactive design.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="mailto:your.email@example.com">Email Me</a>
+              <a class="button-secondary" href="#">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="card contact-box">
+            <div class="contact-item"><div class="mini-label">Email</div><strong>your.email@example.com</strong></div>
+            <div class="contact-item"><div class="mini-label">GitHub</div><strong>github.com/yourusername</strong></div>
+            <div class="contact-item"><div class="mini-label">Location</div><strong>Singapore</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    © 2026 Tay Teng Teng. Built as a clean, expandable, game-dev inspired portfolio.
+  </footer>
 </body>
 </html>
-
-
 
 
 
