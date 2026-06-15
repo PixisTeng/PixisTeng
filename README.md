@@ -1,5 +1,5 @@
 ## Hi there 👋
-## Currently working on my portfolio here pixisteng.github.io/PixisTeng
+Currently working on my portfolio here pixisteng.github.io/PixisTeng
 <!--
 **PixisTeng/PixisTeng** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
